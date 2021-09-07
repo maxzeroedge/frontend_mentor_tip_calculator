@@ -1,9 +1,21 @@
 <main class="main-container">
-    
+    <section class="title-container">
+        SPLI<br/>TTER
+    </section>
+    <section class="content-container">
+        <div class="left-section"></div>
+        <div class="right-section"></div>
+    </section>
 </main>
 
 <style type="text/sass">
-    $primary-color: hsl(245, 75%, 52%)
+    $primary-color: hsl(172, 67%, 45%)
+    $bg-content-color: hsl(185, 41%, 84%)
+    $dark-input-text-color: hsl(186, 14%, 43%)
+    $dark-input-text-disabled-color: hsl(184, 14%, 56%)
+    $light-input-bg-color: hsl(189, 41%, 97%)
+    $content-bg-color: hsl(0, 0%, 100%)
+    $sub-content-bg-color-dark: hsl(183, 100%, 15%)
 
     .main-container
         width: 100vw
@@ -11,76 +23,30 @@
         display: grid
         justify-content: center
         align-content: center
-        background-image: url('images/pattern-background-desktop.svg')
-        background-repeat: no-repeat
-        background-size: 100% 50%
+        background-color: $bg-content-color
+        color: $dark-input-text-color
+        .title-container
+            text-align: center
+            padding-bottom: 5vh
+            font-weight: 500
         .content-container
-            width: 450px
-            height: 100vh
+            width: 64vw
+            height: 47vh
             max-height: 700px
             display: grid
-            grid-template-rows: 11fr 24fr //220:480
             border-radius: 20px
             overflow: hidden
-            background-color: white
+            background-color: $content-bg-color
             justify-self: center
             align-self: center
-            .title-image
-                background-size: cover
-            .summary-container
-                display: grid
-                justify-content: center
-                align-content: space-around
-                padding: 0 50px
-                text-align: center
-                h1
-                    padding: 0
-                    margin: 0
-                .summary-text
-                    color: hsl(224, 23%, 55%)
-                .btn
-                    cursor: pointer
-                    font-size: 90%
-                    font-weight: bold
-                .plan-setting
-                    display: flex
-                    justify-content: space-around
-                    align-content: center
-                    border-radius: 16px
-                    background-color: hsl(225, 100%, 98%)
-                    padding: 16px
-                    .music-icon
-                        width: 50px
-                        height: 50px
-                        background-size: cover
-                    .plan-detail
-                        display: grid
-                        align-content: center
-                        h4, p
-                            padding: 0
-                            margin: 0
-                        p
-                            color: hsl(224, 23%, 55%)
-                    .change-btn
-                        color: hsl(245, 75%, 52%)
-                        display: grid
-                        align-items: center
-                .action-container
-                    .submit-btn
-                        background-color: hsl(245, 75%, 52%)
-                        color: white
-                        padding: 16px
-                        border-radius: 16px
-                        box-shadow: 0px 16px 20px 2px hsla(245, 75%, 52%, 20%)
-                        margin-bottom: 25px
+            grid-template-columns: 1fr 1fr
                         
 
     @media only screen and (max-width: 500px)
         .main-container
             .content-container
-                width: 90%
-                height: min(600px, 100vh)
+                width: 100%
+                height: 85vh
                 max-height: min(600px, 100vh)
-                .summary-container
-                    padding: 0 20px
+
 </style>
