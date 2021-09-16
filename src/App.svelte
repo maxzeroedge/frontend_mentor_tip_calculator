@@ -1,21 +1,30 @@
 <script>
     let billAmount = "0";
     let tipAmount = "Custom";
+    let peopleCount = "0"
+    let tipPerson = "0"
+    let amountPerson = "0"
 
     const tipOptions = [5, 10, 15, 25, 50]
 
     function inputFormatter(e) {
-        console.log(e)
         let data = e.target.textContent
         if(!/^\d+$/ig.test(e.data)){
             data = data.replace(/\w+/ig, '')
         }
-        data = parseFloat(data || "0").toFixed(2)
+        
+        if(!data) {
+            data = "0"
+        } else {
+            data = parseFloat(data || "0").toFixed(2)
+        }
         if(e.target.getAttribute("data-input-type") == "billAmount") {
             billAmount = data
         } else if (e.target.getAttribute("data-input-type") == "tipAmount") {
             tipAmount = data || "Custom"
-        } 
+        } else if (e.target.getAttribute("data-input-type") == "peopleCount") {
+            peopleCount = data || "Custom"
+        }
     }
 </script>
 
@@ -25,7 +34,7 @@
     </section>
     <section class="content-container">
         <div class="left-section">
-            <article class="bill-input-container">
+            <article class="article-container bill-input-container">
                 <span class="bill-input-label label-style">Bill</span>
                 <div class="bill-input">
                     <div class="input-prefix">$</div>
@@ -38,7 +47,7 @@
                 </div>
             </article>
             <span class="bill-input-label label-style">Select Tip %</span>
-            <article class="tip-buttons-container">
+            <article class="article-container tip-buttons-container">
                 {#each tipOptions as tipOption}
                     <div class="tip-button-container button">
                         <span class="tip-amount">{tipOption}%</span>
@@ -52,8 +61,37 @@
                     on:blur={inputFormatter}
                 />
             </article>
+            <span class="bill-input-label label-style">Number of People</span>
+            <article class="article-container people-container bill-input-container">
+                <div class="bill-input">
+                    <div class="input-prefix">👤</div>
+                    <div class="input-data" class:active={!!peopleCount} 
+                        data-input-type="peopleCount"
+                        contenteditable="true" 
+                        bind:innerHTML="{peopleCount}" 
+                        on:blur={inputFormatter}
+                    />
+                </div>
+            </article>
         </div>
-        <div class="right-section"></div>
+        <div class="right-section">
+            <div class="result-container">
+                <div class="amount-container">
+                    <div class="amount-label">
+                        <div class="amount-label-title">Tip Amount</div>
+                        <div class="amount-label-subtitle">/ person</div>
+                    </div>
+                    <div class="amount-value">$ {tipPerson}</div>
+                </div>
+                <div class="amount-container">
+                    <div class="amount-label">
+                        <div class="amount-label-title">Total</div>
+                        <div class="amount-label-subtitle">/ person</div>
+                    </div>
+                    <div class="amount-value">$ {amountPerson}</div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 
@@ -76,6 +114,7 @@
         .content-container
             width: 64vw
             height: 47vh
+            min-height: 500px
             max-height: 700px
             display: grid
             border-radius: 20px
@@ -86,9 +125,12 @@
             grid-template-columns: 1fr 1fr
             .left-section, .right-section
                 padding: 50px
+                box-sizing: border-box
                 .label-style
                     font-size: 60%
                     font-weight: bold
+                .article-container
+                    margin-bottom: 32px
                 .bill-input-container
                     //.bill-input-label
                     .bill-input
@@ -135,6 +177,18 @@
                             background-color: $bg-color
                             &.active, &::focus
                                 border: solid 2px $primary-color
+            .right-section
+                .result-container
+                    background-color: $sub-content-bg-color-dark
+                    height: calc(100% - 50px)
+                    border-radius: 20px
+                    .amount-container
+                        padding: 50px 50px 0
+                        display: grid
+                        grid-template-columns: 1fr 1fr
+                        align-items: center
+                        .amount-value
+                            justify-self: flex-end
                         
 
     @media only screen and (max-width: 500px)
